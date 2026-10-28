@@ -1,0 +1,120 @@
+{
+  "model": "gemini-3.1-flash-lite",
+  "temperature": 0,
+  "max_tokens": 256,
+  "labels": [
+    "Aman",
+    "Waspada",
+    "Berisiko"
+  ],
+  "system_prompt": "Kamu adalah sistem klasifikasi status akademik mahasiswa.\nData: IPK (2,00-4,00), kehadiran kuliah (%), jam belajar mandiri per minggu, tugas terkumpul (%), nilai UTS (0-100), dan keaktifan organisasi.\nLabel:\n- Aman: performa akademik baik secara keseluruhan\n- Waspada: performa sedang, ada beberapa indikator yang perlu diperhatikan\n- Berisiko: performa rendah, berisiko gagal studi\nJawab HANYA dengan satu kata: Aman, Waspada, atau Berisiko.\n\nNilai tengah (median) setiap kelas dari data historis:\n- Aman: IPK 3.43, kehadiran 87%, jam belajar 9, tugas 84%, UTS 80\n- Waspada: IPK 3.06, kehadiran 81%, jam belajar 8, tugas 82%, UTS 70\n- Berisiko: IPK 2.79, kehadiran 73%, jam belajar 7, tugas 76%, UTS 61\nCatatan: kehadiran di bawah 75% sangat menurunkan status.",
+  "few_shot": [
+    {
+      "data": {
+        "ipk": 3.65,
+        "kehadiran": 72,
+        "jam_belajar": 10,
+        "tugas_terkumpul": 84,
+        "nilai_uts": 100,
+        "aktif_organisasi": "Ya"
+      },
+      "label": "Aman"
+    },
+    {
+      "data": {
+        "ipk": 4.0,
+        "kehadiran": 70,
+        "jam_belajar": 14,
+        "tugas_terkumpul": 100,
+        "nilai_uts": 98,
+        "aktif_organisasi": "Tidak"
+      },
+      "label": "Aman"
+    },
+    {
+      "data": {
+        "ipk": 2.0,
+        "kehadiran": 83,
+        "jam_belajar": 9,
+        "tugas_terkumpul": 64,
+        "nilai_uts": 44,
+        "aktif_organisasi": "Ya"
+      },
+      "label": "Berisiko"
+    },
+    {
+      "data": {
+        "ipk": 2.49,
+        "kehadiran": 90,
+        "jam_belajar": 4,
+        "tugas_terkumpul": 65,
+        "nilai_uts": 61,
+        "aktif_organisasi": "Tidak"
+      },
+      "label": "Berisiko"
+    },
+    {
+      "data": {
+        "ipk": 2.77,
+        "kehadiran": 82,
+        "jam_belajar": 5,
+        "tugas_terkumpul": 71,
+        "nilai_uts": 84,
+        "aktif_organisasi": "Ya"
+      },
+      "label": "Waspada"
+    },
+    {
+      "data": {
+        "ipk": 3.03,
+        "kehadiran": 92,
+        "jam_belajar": 6,
+        "tugas_terkumpul": 86,
+        "nilai_uts": 53,
+        "aktif_organisasi": "Ya"
+      },
+      "label": "Waspada"
+    }
+  ],
+  "provider": "gemini",
+  "evaluasi": {
+    "accuracy": 0.63,
+    "f1_macro": 0.6286,
+    "invalid": 0,
+    "n": 200,
+    "latensi_rata2_detik": 4.711,
+    "f1_per_kelas": {
+      "Aman": 0.6168,
+      "Waspada": 0.5205,
+      "Berisiko": 0.7483
+    },
+    "confusion_matrix": {
+      "labels": [
+        "Aman",
+        "Waspada",
+        "Berisiko"
+      ],
+      "matrix": [
+        [
+          33,
+          37,
+          4
+        ],
+        [
+          0,
+          38,
+          17
+        ],
+        [
+          0,
+          16,
+          55
+        ]
+      ]
+    },
+    "durasi_total_detik": 1942.6,
+    "dataset": "dataset_status_akademik.csv (bagian test)",
+    "tanggal": "2026-10-28",
+    "f1_dnn_pembanding": 0.8269
+  }
+}
